@@ -81,15 +81,12 @@ public void setMonthlySalary(Grade grade) {
 		childIdNumbers.add(childIdNumber);
 	}
 	
-// Menyederhanakan logika penghitungan pajak tahunan
-public int getAnnualIncomeTax() {
-    int monthsWorkedInYear = calculateMonthsWorkedInYear();
-    return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthsWorkedInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
-}
-
-private int calculateMonthsWorkedInYear() {
-    LocalDate currentDate = LocalDate.now();
-    return (currentDate.getYear() == yearJoined) ? currentDate.getMonthValue() - monthJoined : 12;
-}
+	// Menyederhanakan logika penghitungan pajak tahunan
+	public int getAnnualIncomeTax() {
+		// Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+		LocalDate date = LocalDate.now();
+		monthWorkingInYear = (date.getYear() == yearJoined) ? date.getMonthValue() - monthJoined : 12;
+		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+	}
 
 }
