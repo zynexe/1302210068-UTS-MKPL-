@@ -48,20 +48,20 @@ public class Employee {
 	}
 	
 	// Menggunakan enum untuk grade pegawai
-public enum Grade {
-    GRADE_1,
-    GRADE_2,
-    GRADE_3
-}
+	public enum Grade {
+		GRADE_1,
+		GRADE_2,
+		GRADE_3
+	}
 
-public void setMonthlySalary(Grade grade) {
-    int[] gradeSalaries = {3000000, 5000000, 7000000};
-    int salary = gradeSalaries[grade.ordinal()];
-    if (isForeigner) {
-        salary *= 1.5;
-    }
-    monthlySalary = salary;
-}
+	public void setMonthlySalary(Grade grade) {
+		int[] gradeSalaries = {3000000, 5000000, 7000000};
+		int salary = gradeSalaries[grade.ordinal()];
+		if (isForeigner) {
+			salary *= 1.5;
+		}
+		monthlySalary = salary;
+	}
 	
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
