@@ -53,17 +53,13 @@ public class Employee {
 	 */
 	
 	// Memisahkan logika gaji bulanan ke metode terpisah
+// Method untuk menentukan gaji bulanan berdasarkan grade pegawai
 public void setMonthlySalary(int grade) {
-    monthlySalary = calculateMonthlySalary(grade);
-}
-
-private int calculateMonthlySalary(int grade) {
     int[] gradeSalaries = {3000000, 5000000, 7000000};
-    int salary = gradeSalaries[grade - 1];
+    monthlySalary = gradeSalaries[grade - 1];
     if (isForeigner) {
-        salary *= 1.5;
+        monthlySalary *= 1.5;
     }
-    return salary;
 }
 
 	
