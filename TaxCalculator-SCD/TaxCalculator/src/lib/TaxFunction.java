@@ -15,30 +15,24 @@ public class TaxFunction {
 	 */
 	
 	
-	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
-		
+	 public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
 		int tax = 0;
-		
+		int taxFreeIncome = calculateTaxFreeIncome(isMarried, numberOfChildren);
 		if (numberOfMonthWorking > 12) {
-			System.err.println("More than 12 month working per year");
+			System.err.println("Lebih dari 12 bulan bekerja dalam setahun");
 		}
-		
-		if (numberOfChildren > 3) {
-			numberOfChildren = 3;
-		}
-		
-		if (isMarried) {
-			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (54000000 + 4500000 + (numberOfChildren * 1500000))));
-		}else {
-			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - 54000000));
-		}
-		
-		if (tax < 0) {
-			return 0;
-		}else {
-			return tax;
-		}
-			 
+		tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - taxFreeIncome));
+		return (tax < 0) ? 0 : tax;
 	}
+	
+	private static int calculateTaxFreeIncome(boolean isMarried, int numberOfChildren) {
+		int taxFreeIncome = 54000000;
+		if (isMarried) {
+			taxFreeIncome += 4500000;
+		}
+		taxFreeIncome += Math.min(numberOfChildren, 3) * 1500000;
+		return taxFreeIncome;
+	}
+	
 	
 }
